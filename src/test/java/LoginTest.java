@@ -1,6 +1,8 @@
 import org.junit.jupiter.api.Test;
-import static com.codeborne.selenide.Selenide.*;
+
 import static com.codeborne.selenide.Condition.*;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 public class LoginTest {
 
@@ -8,27 +10,26 @@ public class LoginTest {
 
     @Test
     public void successfulLoginTest() {
-        open(LOGIN_PAGE_URL);
-        $("#username").setValue("tomsmith");
-        $("#password").setValue("SuperSecretPassword!");
-        $(".radius").click();
-        $(".flash.success").shouldHave(text("You logged into a secure area!"));
+        LoginPage loginPage = open(LOGIN_PAGE_URL, LoginPage.class);
+        SecureAreaPage secureAreaPage = loginPage.loginSuccess("tomsmith", "SuperSecretPassword!");
+        secureAreaPage.verifySuccessMessage("You logged into a secure area!");
     }
 
     @Test
     void invalidPasswordTest() {
-        open(LOGIN_PAGE_URL);
-        $("#username").setValue("tomsmith");
-        $("#password").setValue("wrongpassword");
-        $(".radius").click();
-        $(".flash.error").shouldHave(text("Your password is invalid!"));
+        LoginPage loginPage = open(LOGIN_PAGE_URL, LoginPage.class);
+        loginPage.enterUsername("tomsmith");
+        loginPage.enterPassword("wrongPassword");
+        loginPage.clickLogin();
+
+        loginPage.getFlashMessage().shouldHave(text("Your password is invalid!"));
     }
 
     @Test
     void loginPageElementsTest() {
-        open(LOGIN_PAGE_URL);
-        $("#username").shouldBe(visible);
-        $("#password").shouldBe(visible);
-        $(".radius").shouldBe(visible, enabled);
+        LoginPage loginPage = open(LOGIN_PAGE_URL, LoginPage.class);
+        loginPage.getUsernameInput().shouldBe(visible);
+        loginPage.getPasswordInput().shouldBe(visible);
+        loginPage.getLoginButton().shouldBe(visible, enabled);
     }
 }
