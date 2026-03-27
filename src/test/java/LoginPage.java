@@ -2,6 +2,8 @@ import com.codeborne.selenide.SelenideElement;
 
 import static com.codeborne.selenide.Selenide.$;
 
+
+
 public class LoginPage {
     private final SelenideElement usernameInput = $("#username");
     private final SelenideElement passwordInput = $("#password");

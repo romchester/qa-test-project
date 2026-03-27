@@ -1,3 +1,7 @@
+import io.qameta.allure.Description;
+import io.qameta.allure.Severity;
+import io.qameta.allure.SeverityLevel;
+import io.qameta.allure.Story;
 import io.restassured.http.ContentType;
 import org.junit.jupiter.api.Test;
 
@@ -10,6 +14,9 @@ public class ApiTests {
     private static final String END_POINT_COMMENTS = "https://jsonplaceholder.typicode.com/comments";
 
     @Test
+    @Story("Успешное добавление поста")
+    @Severity(SeverityLevel.CRITICAL)
+    @Description("Проверка добавление поста с кодом 200")
     public void getPostById1() {
         int postId = 1;
 
@@ -24,6 +31,9 @@ public class ApiTests {
     }
 
     @Test
+    @Story("Получение массива комментариев")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Проверка получение комментариев и что у всех postID = 1")
     public void getCommentsByPostId() {
         given()
                 .queryParam("postId", 1)
@@ -37,6 +47,9 @@ public class ApiTests {
     }
 
     @Test
+    @Story("Создание нового поста")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Проверка что новый пост создан после отправки JSON объекта")
     public void createPostAndExtractId() {
         String creatingPost = """
                 {
@@ -64,6 +77,9 @@ public class ApiTests {
     }
 
     @Test
+    @Story("Удаление поста")
+    @Severity(SeverityLevel.NORMAL)
+    @Description("Проверка что пост удален")
     public void deletePost() {
         int postId = 1;
 
