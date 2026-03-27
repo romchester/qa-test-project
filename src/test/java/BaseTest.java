@@ -5,7 +5,7 @@ import org.junit.jupiter.api.BeforeAll;
 public class BaseTest {
     @BeforeAll
     public static void setUp(){
-        String remote = System.getProperty("remote", "http://selenoid:4444/wd/hub");
+        String remote = System.getProperty("remote", "http://localhost:4444/wd/hub");
         Configuration.remote = remote;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
