@@ -8,7 +8,7 @@ import org.junit.jupiter.api.Test;
 import static io.restassured.RestAssured.*;
 import static org.hamcrest.Matchers.*;
 
-public class ApiTests {
+public class ApiTests extends BaseTest{
 
     private static final String END_POINT_POSTS = "https://jsonplaceholder.typicode.com/posts";
     private static final String END_POINT_COMMENTS = "https://jsonplaceholder.typicode.com/comments";

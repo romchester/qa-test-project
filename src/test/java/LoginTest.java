@@ -4,11 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.openqa.selenium.OutputType;
 
 import static com.codeborne.selenide.Condition.*;
-import static com.codeborne.selenide.Selenide.$;
 import static com.codeborne.selenide.Selenide.open;
 
 @Feature("Авторизация")
-public class LoginTest {
+public class LoginTest extends BaseTest{
 
     private static final String LOGIN_PAGE_URL = "https://the-internet.herokuapp.com/login";
 

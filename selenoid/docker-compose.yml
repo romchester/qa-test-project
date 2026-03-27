@@ -1,0 +1,29 @@
+version: '3'
+services:
+  selenoid:
+    image: aerokube/selenoid:latest
+    container_name: selenoid
+    networks:
+      - test-net
+    ports:
+      - "4444:4444"
+    volumes:
+      - "/var/run/docker.sock:/var/run/docker.sock"
+      - "./config:/etc/selenoid"
+    command: ["-conf", "/etc/selenoid/browsers.json", "-video-output-dir", "/opt/selenoid/video"]
+
+  selenoid-ui:
+    image: aerokube/selenoid-ui:latest
+    container_name: selenoid-ui
+    networks:
+      - test-net
+    ports:
+      - "8081:8080"
+    depends_on:
+      - selenoid
+    links:
+      - selenoid
+
+networks:
+  test-net:
+    external: true
