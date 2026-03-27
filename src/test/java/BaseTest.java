@@ -9,7 +9,5 @@ public class BaseTest {
         Configuration.remote = remote;
         Configuration.browser = "chrome";
         Configuration.browserSize = "1920x1080";
-        Configuration.browserCapabilities.setCapability("enableVNC", true);
-        Configuration.browserCapabilities.setCapability("enableVideo", false);
     }
 }
